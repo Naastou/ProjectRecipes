@@ -11,6 +11,7 @@ function Search() {
     e.preventDefault();
     navigate("/searched/" + input);
   };
+
   return (
     <FormStyle onSubmit={submitHandler}>
       <div>
@@ -27,9 +28,10 @@ function Search() {
 
 const FormStyle = styled.form`
   margin: 0rem 20rem;
-  position: relative;
+
   div {
     width: 100%;
+    position: relative;
   }
   input {
     border: none;
