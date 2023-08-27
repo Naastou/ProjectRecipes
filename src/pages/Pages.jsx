@@ -1,4 +1,5 @@
 import Home from "./Home";
+import About from "./About";
 import Cuisine from "./Cuisine";
 import Searched from "./Searched";
 import Recipe from "./Recipe";
@@ -11,6 +12,7 @@ function Pages() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/cuisine/:type" element={<Cuisine />} />
         <Route path="/searched/:search" element={<Searched />} />
         <Route path="/recipe/:name" element={<Recipe />} />
