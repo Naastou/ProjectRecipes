@@ -37,6 +37,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 999;
 }
 
 .nav-header {
@@ -98,7 +99,7 @@ nav {
     display: none;
   }
   .links-container {
-    height: auto;
+    height: auto !important;
   }
   .links {
     display: flex;
