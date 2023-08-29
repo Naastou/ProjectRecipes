@@ -7,16 +7,19 @@ function About() {
       <HeroSection className="light hero">
         <div className="heroInner">
           <span>
-            <h1>Find the perfect recipes everyday</h1>
+            <h1>
+              Find the perfect <br /> recipes{" "}
+              <span className="everyday">everyday</span>
+            </h1>
             <p>
-              Welcome to CookAddict,the blog for all cooking addicts. <br />
+              Welcome to CookAddict, the blog for all cooking addicts. <br />
               Here you will find easy everyday recipes with flavors from around
               the world. <br />
               Rediscover the pleasure of homemade, have fun in the kitchen and
               delight your friends and family.
             </p>
-            <Link to={"/"} className="btn btn-light">
-              Find your inspiration
+            <Link to={"/"} className="btn">
+              <button>Find your inspiration</button>
             </Link>
           </span>
         </div>
@@ -34,11 +37,15 @@ const HeroSection = styled.section`
   padding: 15rem 3rem 6rem;
   .heroInner {
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 700px;
+    margin-left: 2rem;
   }
-  span {
-    max-width: 50%;
+  .everyday {
+    color: red;
+  }
+
+  span: {
+    max-width: 60%;
   }
   h1 {
     font-weight: 900;
@@ -46,14 +53,47 @@ const HeroSection = styled.section`
     line-height: 1.2;
     margin-bottom: 1.5rem;
   }
-  @media (max-width: 576px) {
-    background: linear-gradient(rgba(241, 80, 37, 0.25), rgba(0, 0, 0, 0.25)),
+  span p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+  .btn {
+    color: red;
+    text-decoration: none;
+  }
+  button {
+    background: white;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 2rem;
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+  }
+  @media (max-width: 600px) {
+    background: linear-gradient(rgba(241, 80, 37, 0.5), rgba(0, 0, 0, 0.75)),
       url("./background1.jpg") no-repeat center/cover fixed;
 
-    align-items: flex-start;
-    padding-top: 7.5rem;
-    height: 75vh;
-    max-height: 720px;
+    .heroInner {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 60vw;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 0;
+    }
+    span p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      ligne-height: 1.5;
+    }
+    button {
+      margin-bottom: 1rem;
+      font-weight: Bold;
+    }
   }
 `;
 

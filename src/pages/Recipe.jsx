@@ -39,8 +39,8 @@ function Recipe() {
         </Button>
         {activeTab === "instructions" && (
           <div>
-            <h3> {details.summary}</h3>
-            <h3> {details.instructions}</h3>
+            {/* <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3> */}
+            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
           </div>
         )}
         {activeTab === "ingredients" && (
@@ -48,7 +48,6 @@ function Recipe() {
             {details.extendedIngredients.map((ingredient) => (
               <li key={ingredient.id}>{ingredient.original}</li>
             ))}
-            bbb{" "}
           </ul>
         )}
       </Info>
@@ -56,14 +55,17 @@ function Recipe() {
   );
 }
 
-const DetailWrapper = styled.div`
-  margin-top: 10rem;
+const DetailWrapper = styled.section`
+  margin-top: 5rem;
   margin-bottom: 5rem;
   display: flex;
+
   .active {
     background: linear-gradient(35deg, #494949, #313131);
     color: white;
+    border: 2px solid black;
   }
+
   h2 {
     margin-bottom: 2rem;
   }
@@ -74,6 +76,19 @@ const DetailWrapper = styled.div`
   ul {
     margin-top: 2rem;
   }
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-rows: repeat(300px);
+    justify-content: center;
+    justify-items: center;
+    row-gap: 3rem;
+    margin: 0rem auto;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -81,12 +96,17 @@ const Button = styled.button`
   color: #313131;
   background: white;
   border: 2px solid black;
-  margin-right: 2rem;
+  margin: 0rem auto;
   font-weight: 600;
 `;
 
 const Info = styled.div`
-  margin-left: 10rem;
+  margin-left: 5rem;
+  text-align: justify;
+  @media (max-width: 600px) {
+    margin: 0 auto;
+    padding: 1rem;
+  }
 `;
 
 export default Recipe;

@@ -32,15 +32,17 @@ function Category() {
 }
 
 const List = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(2rem, 5rem));
+  grid-gap: 1rem;
   justify-content: center;
-
   margin: 2rem auto;
 `;
 const SLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  justify-self: center;
   align-items: center;
   border: 2px solid #f27121;
   border-radius: 50%;
@@ -50,7 +52,6 @@ const SLink = styled(NavLink)`
   height: 6rem;
   cursor: pointer;
   transform: scale(0.8);
-
   h4 {
     color: white;
     font-size: 0.8rem;
@@ -58,6 +59,9 @@ const SLink = styled(NavLink)`
   svg {
     color: white;
     font-size: 1.5rem;
+  }
+  &:hover {
+    background: linear-gradient(to right, #f27121, #e94057);
   }
   &.active {
     background: linear-gradient(to right, #f27121, #e94057);

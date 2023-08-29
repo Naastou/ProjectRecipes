@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+:root {
+  --transition: all 0.3s linear;
+}
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -17,18 +20,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 .section {
   padding: 5rem 0;
   width: 90vw;
   margin: 0rem auto;
   max-width: 1170px;
 }
+@media screen and (max-width: 576px) {
+  .section {
+    width: 80vw;
+  }
+}
 
 /*
-=============== 
 Navbar
-===============
 */
 nav {
   background: linear-gradient(to right, #f27121, #e94057);
@@ -69,16 +74,21 @@ nav {
   letter-spacing: 1.5;
   text-decoration: none;
   font-weight: 600;
+  padding: 1rem;
   transition: var(--transition);
+}
+.link:hover {
+  background: linear-gradient(to right, #f3a371, #e17987);
+  padding-left: 1.5rem;
 }
 
 .links-container {
   height: 0rem;
+  overflow: hidden;
 }
 .links {
   display: grid;
   grid-template-rows: auto;
-  row-gap: 1rem;
 }
 .showLinks {
   height: 10rem;
@@ -90,7 +100,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem;
   }
   .nav-header {
     padding: 0;
@@ -109,15 +119,69 @@ nav {
   .link:hover {
     color: black;
   }
-  /* .social-icons {
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(to right, #f27121, #e94057);
+  text-align: center;
+  padding: 1rem;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-link {
+  color: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  letter-spacing: 1.5;
+  text-decoration: none;
+  font-weight: 400;
+  padding: 1rem;
+  transition: var(--transition);
+}
+.footer-link:hover {
+  color: black;
+}
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+.footer-icons a {
+  color: white;
+  font-size: 1.5rem;
+}
+.footer-icons a:hover {
+  color: black;
+}
+.footer-text {
+  font-size: 1.25rem;
+  text-transform: capitalize;
+  text-align: center;
+  margin: 0;
+  color: white;
+}
+@media screen and (min-width: 800px) {
+  .footer-center {
     display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0.5rem;
   }
-  .social-icons a {
-    margin: 0 0.5rem;
-    color: var(--clr-primary-5);
-    transition: var(--transition);
+  .footer-link {
+    padding: 0;
   }
-  .social-icons a:hover {
-    color: var(--clr-primary-7);
-  } */
+  .footer-icons {
+    padding: 0;
+  }
 }

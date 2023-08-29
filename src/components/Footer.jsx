@@ -9,38 +9,35 @@ import {
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="links">
-        <Link
-          to="/"
-          // style={({ isActive }) => ({ color: isActive ? 'red' : 'grey' })}
-          className={({ isActive }) => (isActive ? "link active" : "link")}
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          className={({ isActive }) => (isActive ? "link active" : "link")}
-        >
-          About
-        </Link>
-      </div>
+      <div className="footer-center">
+        <div className="footer-links">
+          <Link className="footer-link" to="/">
+            Home
+          </Link>
+          <Link className="footer-link" to="/about">
+            About
+          </Link>
+        </div>
 
-      <div>
-        <span style={{ paddingRight: 5 }}>Copyright </span>
-        <FaCopyright />
-        <span style={{ paddingLeft: 5 }}>
-          {new Date().getFullYear()} CookAddict. All Rights Reserved.
-        </span>
+        <div className="footer-text">
+          <span style={{ paddingRight: 5 }}>Copyright </span>
+          <FaCopyright />
+          <span style={{ paddingLeft: 5 }}>
+            {new Date().getFullYear()} CookAddict. All Rights Reserved.
+          </span>
+        </div>
+        <div className="footer-icons">
+          <a href="https://www.instagram.com/">
+            <FaInstagram />
+          </a>
+          <a href="https://www.facebook.com/">
+            <FaFacebook />
+          </a>
+          <a href="https://www.youtube.com/">
+            <FaYoutube />
+          </a>
+        </div>
       </div>
-      <a href="https://www.instagram.com/">
-        <FaInstagram />
-      </a>
-      <a href="https://www.facebook.com/">
-        <FaFacebook />
-      </a>
-      <a href="https://www.youtube.com/">
-        <FaYoutube />
-      </a>
     </footer>
   );
 };

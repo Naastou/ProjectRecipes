@@ -43,6 +43,8 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 3rem;
+  justify-items: center;
+  justify-content: center;
 `;
 const Card = styled.div`
   img {
@@ -51,10 +53,12 @@ const Card = styled.div`
   }
   a {
     text-decoration: none;
+    color: red;
   }
   h4 {
     text-align: center;
     padding: 1rem;
   }
 `;
+
 export default Cuisine;

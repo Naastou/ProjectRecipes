@@ -6,7 +6,7 @@ function Welcome() {
       <div className="heroInner">
         <span>
           <h1>
-            Welcome to CookAddict, <br />
+            Welcome to <span className="cookaddict">CookAddict</span>, <br />
             The blog for all cooking addicts{" "}
           </h1>
         </span>
@@ -27,6 +27,9 @@ const Header = styled.div`
     max-width: 1200px;
     margin: 0 auto;
   }
+  .cookaddict {
+    color: red;
+  }
   span {
     max-width: 50%;
   }
@@ -37,13 +40,17 @@ const Header = styled.div`
     margin-bottom: 1.5rem;
   }
   @media (max-width: 576px) {
-    background: linear-gradient(rgba(241, 80, 37, 0.25), rgba(0, 0, 0, 0.25)),
+    background: linear-gradient(rgba(241, 80, 37, 0.5), rgba(0, 0, 0, 0.5)),
       url("./welcome.jpg") no-repeat left bottom/cover fixed;
 
     align-items: flex-start;
     padding-top: 7.5rem;
     height: 75vh;
     max-height: 720px;
+
+    .cookaddict {
+      color: white;
+    }
   }
 `;
 export default Welcome;
