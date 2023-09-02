@@ -34,6 +34,7 @@ function Popular() {
 
         <Splide
           options={{
+            rewind: true,
             perPage: 3,
             breakpoints: {
               767: {
@@ -43,8 +44,6 @@ function Popular() {
                 perPage: 1,
               },
             },
-            arrows: false,
-            pagination: false,
             gap: "5rem",
           }}
         >

@@ -1,7 +1,22 @@
-import { Link, Form } from "react-router-dom";
+import { Link, Form, redirect } from "react-router-dom";
 import FormRow from "../components/FormRow.jsx";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export const action = async ({ request }) => {};
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  try {
+    const resp = await axios.post("/api/v1/auth/login", data);
+    localStorage.setItem("token", resp.data.token);
+    toast.success("Connexion réussie");
+    return redirect("/home");
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
+};
 
 const Login = () => {
   return (
