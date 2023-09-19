@@ -23,7 +23,7 @@ function Category() {
         <GiChopsticks />
         <h4>Japanese</h4>
       </SLink>
-      <SLink to={"/cuisine/Japanese"}>
+      <SLink to={"/cuisine/African"}>
         <PiFishSimple />
         <h4>African</h4>
       </SLink>

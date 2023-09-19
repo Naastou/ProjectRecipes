@@ -1,14 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate, useRevalidator } from "react-router-dom";
 import styled from "styled-components";
 import { GiChefToque } from "react-icons/gi";
-
-const Navbar = () => {
+import { toast } from "react-toastify";
+const Navbar = ({ user }) => {
   const [showLinks, setShowLinks] = useState(false);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
+  const navigate = useNavigate();
+  const revalidator = useRevalidator();
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    revalidator.revalidate();
+    toast.success("Déconnexion...");
+    navigate("/");
+  };
   useEffect(() => {
     if (!linksRef.current) return;
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -27,6 +35,14 @@ const Navbar = () => {
             <GiChefToque />
             <Logo to={"/"}>CookAddict</Logo>
           </Nav>
+          {user && (
+            <div className="links nav-user-info">
+              <span className="username">{user.name}</span>
+              <button type="button" className="btn-signout" onClick={logout}>
+                Sign out
+              </button>
+            </div>
+          )}
           <button
             className="nav-toggle"
             onClick={() => setShowLinks(!showLinks)}
@@ -36,6 +52,12 @@ const Navbar = () => {
         </div>
         <div className="links-container" ref={linksContainerRef}>
           <div className=" links " ref={linksRef}>
+            {user && (
+              <NavLink to="/admin" className="link">
+                Dashboard
+              </NavLink>
+            )}
+
             <NavLink to="/" className="link">
               Home
             </NavLink>

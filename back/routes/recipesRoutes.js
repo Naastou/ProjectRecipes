@@ -21,16 +21,21 @@ const {
   getAllRecipes,
 } = require("../controllers/recipesController.js");
 
-router.use(authenticateUser);
-router.route("/admin").get(authorizePermissions("admin"), getAllRecipes);
+router
+  .route("/admin")
+  .get(authenticateUser, authorizePermissions("admin"), getAllRecipes);
 router
   .route("/")
-  .get(getAllUserRecipes)
-  .post(validateAddRecipeInput, createRecipe);
+  .get(getAllRecipes)
+  .post(validateAddRecipeInput, authenticateUser, createRecipe);
 router
   .route("/:id")
   .get(validateIdParam, getSingleRecipe)
-  .put([validateIdParam, validateUpdateRecipeInput], updateRecipe)
-  .delete(validateIdParam, deleteRecipe);
+  .put(
+    [validateIdParam, validateUpdateRecipeInput],
+    authenticateUser,
+    updateRecipe
+  )
+  .delete(validateIdParam, authenticateUser, deleteRecipe);
 
 module.exports = router;

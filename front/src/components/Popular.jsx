@@ -36,15 +36,15 @@ function Popular() {
           options={{
             rewind: true,
             perPage: 3,
+            gap: "5rem",
             breakpoints: {
-              767: {
+              840: {
                 perPage: 2,
               },
               640: {
                 perPage: 1,
               },
             },
-            gap: "5rem",
           }}
         >
           {popular.map((recipe) => {

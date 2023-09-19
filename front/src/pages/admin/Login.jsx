@@ -1,5 +1,5 @@
 import { Link, Form, redirect } from "react-router-dom";
-import FormRow from "../components/FormRow.jsx";
+import FormRow from "../../components/FormRow.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,7 @@ export const action = async ({ request }) => {
     const resp = await axios.post("/api/v1/auth/login", data);
     localStorage.setItem("token", resp.data.token);
     toast.success("Connexion réussie");
-    return redirect("/home");
+    return redirect("/admin");
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;

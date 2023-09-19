@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import SearchLayout from "../layouts/SearchLayout";
 
 function About() {
   return (
     <div>
+      <SearchLayout />
       <HeroSection className="light hero">
         <div className="heroInner">
           <span>
@@ -18,7 +20,7 @@ function About() {
               Rediscover the pleasure of homemade, have fun in the kitchen and
               delight your friends and family.
             </p>
-            <Link to={"/"} className="btn">
+            <Link to={"/"}>
               <button>Find your inspiration</button>
             </Link>
           </span>
@@ -58,9 +60,7 @@ const HeroSection = styled.section`
     font-weight: 400;
     margin-top: 2rem;
   }
-  .btn {
-    color: red;
-    text-decoration: none;
+  
   }
   button {
     background: white;

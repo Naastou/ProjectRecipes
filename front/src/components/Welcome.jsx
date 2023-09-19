@@ -17,7 +17,7 @@ function Welcome() {
 
 const Header = styled.div`
   background: linear-gradient(rgba(241, 80, 37, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./welcome.jpg") no-repeat left bottom/cover fixed;
+    url("/images/welcome.jpg") no-repeat bottom/cover fixed;
 
   height: fit-content;
   color: #fafafc;
@@ -41,7 +41,7 @@ const Header = styled.div`
   }
   @media (max-width: 576px) {
     background: linear-gradient(rgba(241, 80, 37, 0.5), rgba(0, 0, 0, 0.5)),
-      url("./welcome.jpg") no-repeat left bottom/cover fixed;
+      url("/images/welcome.jpg") no-repeat bottom/cover fixed;
 
     align-items: flex-start;
     padding-top: 7.5rem;

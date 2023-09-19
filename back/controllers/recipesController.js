@@ -1,8 +1,15 @@
 const db = require("../db");
 const { StatusCodes } = require("http-status-codes");
 
-const getAllRecipes = async (_req, res) => {
-  const { rows: recipes } = await db.query("SELECT * FROM recipes");
+const getAllRecipes = async (req, res) => {
+  const { category } = req.query;
+  let queryString = "SELECT * FROM recipes JOIN categories USING (category_id)";
+  let parameters = [];
+  if (category) {
+    queryString = `${queryString} WHERE categories.name=$1`;
+    parameters.push(category);
+  }
+  const { rows: recipes } = await db.query(queryString, parameters);
   res.status(StatusCodes.OK).json({ count: recipes.length, recipes });
 };
 
@@ -35,7 +42,7 @@ const getSingleRecipe = async (req, res) => {
 
   const {
     rows: [recipe],
-  } = await db.query("SELECT * FROM recipes WHERE recipe_id = $1", [id]);
+  } = await db.query("SELECT * FROM recipes WHERE recipes_id = $1", [id]);
 
   res.status(StatusCodes.OK).json({ recipe });
 };
@@ -47,7 +54,7 @@ const updateRecipe = async (req, res) => {
   const {
     rows: [updatedRecipe],
   } = await db.query(
-    "UPDATE recipes SET completed = $1 WHERE recipe_id = $2 RETURNING *",
+    "UPDATE recipes SET completed = $1 WHERE recipes_id = $2 RETURNING *",
     [completed, id]
   );
 
@@ -61,7 +68,7 @@ const deleteRecipe = async (req, res) => {
 
   const {
     rows: [deletedRecipe],
-  } = await db.query("DELETE FROM recipes WHERE recipe_id = $1 RETURNING *", [
+  } = await db.query("DELETE FROM recipes WHERE recipes_id = $1 RETURNING *", [
     id,
   ]);
 

@@ -10,11 +10,10 @@ function Recipe() {
 
   useEffect(() => {
     const fetchDetails = async () => {
-      const data = await fetch(
-        `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
-      );
+      const data = await fetch(`/api/v1/recipes/${params.name}`);
       const detailData = await data.json();
-      setDetails(detailData);
+      console.log(detailData.recipe);
+      setDetails(detailData.recipe);
     };
     fetchDetails();
   }, [params.name]);
@@ -74,7 +73,6 @@ const DetailWrapper = styled.section`
   img {
     width: 100%;
   }
-
   h2 {
     margin-bottom: 2rem;
   }

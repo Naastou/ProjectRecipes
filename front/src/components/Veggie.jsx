@@ -35,8 +35,9 @@ function Veggie() {
           options={{
             rewind: true,
             perPage: 3,
+            gap: "5rem",
             breakpoints: {
-              767: {
+              840: {
                 perPage: 2,
               },
               640: {

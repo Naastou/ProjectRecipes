@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import SearchLayout from "../layouts/SearchLayout";
 
 function Searched() {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
@@ -20,18 +21,21 @@ function Searched() {
   }, [params.search]);
 
   return (
-    <Grid>
-      {searchedRecipes.map((item) => {
-        return (
-          <Card key={item.id}>
-            <Link to={"/recipe/" + item.id}>
-              <img src={item.image} alt="" />
-              <h4>{item.title}</h4>
-            </Link>
-          </Card>
-        );
-      })}
-    </Grid>
+    <div>
+      <SearchLayout />
+      <Grid>
+        {searchedRecipes.map((item) => {
+          return (
+            <Card key={item.id}>
+              <Link to={"/recipe/" + item.id}>
+                <img src={item.image} alt="" />
+                <h4>{item.title}</h4>
+              </Link>
+            </Card>
+          );
+        })}
+      </Grid>
+    </div>
   );
 }
 
@@ -41,6 +45,7 @@ const Grid = styled.div`
   grid-gap: 3rem;
 `;
 const Card = styled.div`
+  width: 350px;
   img {
     width: 100%;
     border-radius: 2rem;

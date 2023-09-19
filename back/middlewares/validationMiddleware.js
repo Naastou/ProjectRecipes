@@ -93,10 +93,10 @@ const validateAddRecipeInput = withValidationErrors([
     .notEmpty()
     .withMessage("Ingredients are required")
     .escape(),
-  body("category_id")
-    .notEmpty()
-    .withMessage("Category-id is required")
-    .escape(),
+  // body("category_id")
+  //   .notEmpty()
+  //   .withMessage("Category_id is required")
+  //   .escape(),
 ]);
 
 // validateUpdateRecipeInput
@@ -113,18 +113,18 @@ const validateIdParam = withValidationErrors(
 
     const {
       rows: [recipe],
-    } = await db.query("SELECT * FROM recipes WHERE recipe_id = $1", [id]);
+    } = await db.query("SELECT * FROM recipes WHERE recipes_id = $1", [id]);
 
     if (!recipe) {
       throw new Error(`No recipes with this id ${id}`);
     }
 
-    const isOwner = req.user.userId === recipe.user_id;
-    const isAdmin = req.user.role === "admin";
+    // const isOwner = req.user.userId === recipe.user_id;
+    // const isAdmin = req.user.role === "admin";
 
-    if (!isOwner && !isAdmin) {
-      throw new Error("Accès non autorisé");
-    }
+    // if (!isOwner && !isAdmin) {
+    //   throw new Error("Accès non autorisé");
+    // }
   })
 );
 

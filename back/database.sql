@@ -18,7 +18,7 @@ CREATE TABLE categories(
 CREATE TABLE recipes(
   recipes_id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  image VARCHAR(500) NOT NULL;
+  image VARCHAR(500) NOT NULL,
   ingredients text,
   instructions text,
   category_id INT REFERENCES categories(category_id),
