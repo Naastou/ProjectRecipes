@@ -2,20 +2,37 @@ const db = require("../db");
 const { StatusCodes } = require("http-status-codes");
 
 const getAllRecipes = async (req, res) => {
-  const { category } = req.query;
+  const { category, search } = req.query;
   let queryString = "SELECT * FROM recipes JOIN categories USING (category_id)";
-  let parameters = [];
+  const parameters = [];
+  const whereClauses = [];
   if (category) {
-    queryString = `${queryString} WHERE categories.name=$1`;
+    whereClauses.push(`categories.name=$${parameters.length + 1}`);
     parameters.push(category);
   }
+
+  if (search) {
+    whereClauses.push(`recipes.title ILIKE $${parameters.length + 1}`);
+    parameters.push(`%${search}%`);
+  }
+  // pagination + limite
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+
+  queryString = `${queryString} ${
+    whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : ""
+  } LIMIT $${parameters.length + 1} OFFSET $${parameters.length + 2}`;
+  parameters.push(limit, offset);
+  console.log(queryString);
   const { rows: recipes } = await db.query(queryString, parameters);
+
   res.status(StatusCodes.OK).json({ count: recipes.length, recipes });
 };
 
 const createRecipe = async (req, res) => {
   const { title, image, instructions, ingredients, category_id } = req.body;
-  const { userId } = req.user ?? 1;
+  const { userId } = req.user;
 
   const {
     rows: [createdRecipe],
@@ -49,13 +66,13 @@ const getSingleRecipe = async (req, res) => {
 
 const updateRecipe = async (req, res) => {
   const { id } = req.params;
-  const { completed } = req.body;
+  const { title, image, instructions, ingredients, category_id } = req.body;
 
   const {
     rows: [updatedRecipe],
   } = await db.query(
-    "UPDATE recipes SET completed = $1 WHERE recipes_id = $2 RETURNING *",
-    [completed, id]
+    "UPDATE recipes SET title = $1, image =$2, instructions=$3, ingredients=$4, category_id=$5 WHERE recipes_id=$6 RETURNING *",
+    [title, image, instructions, ingredients, category_id, id]
   );
 
   res

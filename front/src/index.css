@@ -67,7 +67,7 @@ nav {
 }
 
 .nav-user-info {
-  margin-left: 15rem;
+  margin-left: 10rem;
 }
 .username {
   font-size: 1rem;
@@ -358,4 +358,37 @@ form h4 {
 }
 .add-recipe {
   text-align: center;
+}
+/* Pagination */
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15rem;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  margin: 0 2px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.pagination-button.active {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+}
+
+.pagination-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.page-numbers {
+  display: flex;
+  flex-wrap: wrap;
 }

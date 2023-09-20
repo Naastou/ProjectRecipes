@@ -1,4 +1,4 @@
-import { Link, Form, redirect } from "react-router-dom";
+import { Form, Link, redirect } from "react-router-dom";
 import FormRow from "../../components/FormRow.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,9 +8,9 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    const resp = await axios.post("/api/v1/auth/login", data);
+    const resp = await axios.post("/api/v1/auth/register", data);
     localStorage.setItem("token", resp.data.token);
-    toast.success("Successful Connection ");
+    toast.success("Successful Register");
     return redirect("/admin");
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -18,19 +18,18 @@ export const action = async ({ request }) => {
   }
 };
 
-const Login = () => {
+const Register = () => {
   return (
     <Form method="POST" className="form">
-      <h4>Connection</h4>
+      <h4>Register</h4>
+      <FormRow type="text" name="name" labelText="nom" />
       <FormRow type="email" name="email" />
       <FormRow type="password" name="password" labelText="mot de passe" />
-      <button type="submit" className="btn btn-block">
-        Login
-      </button>
+      <button className="btn btn-block">Register</button>
       <p style={{ textAlign: "center", marginTop: "1em" }}>
-        You don't have a account <Link to="/register">Register</Link>
+        Already a member? <Link to="/login">Login</Link>
       </p>
     </Form>
   );
 };
-export default Login;
+export default Register;

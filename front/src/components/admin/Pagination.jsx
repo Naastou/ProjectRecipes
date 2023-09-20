@@ -1,0 +1,44 @@
+import { GrNext, GrPrevious } from "react-icons/gr";
+
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
+
+  return (
+    <div className="pagination-container">
+      <button
+        className={`pagination-button ${currentPage === 1 ? "disabled" : ""}`}
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        <GrPrevious />
+      </button>
+      <div className="page-numbers">
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            className={`pagination-button ${
+              currentPage === pageNumber ? "active" : ""
+            }`}
+            onClick={() => onPageChange(pageNumber)}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
+      <button
+        className={`pagination-button ${
+          currentPage === totalPages ? "disabled" : ""
+        }`}
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        <GrNext />
+      </button>
+    </div>
+  );
+};
+
+export default Pagination;

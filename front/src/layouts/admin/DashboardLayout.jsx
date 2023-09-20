@@ -3,6 +3,7 @@ import {
   redirect,
   useLoaderData,
   useOutletContext,
+  Navigate,
 } from "react-router-dom";
 
 import axios from "axios";
@@ -26,8 +27,10 @@ export const loader = async () => {
 
 const DashboardLayout = () => {
   const { data } = useLoaderData();
-  const { categories } = useOutletContext();
-
+  const { categories, user } = useOutletContext();
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   const recipes = data.recipes;
 
   return (

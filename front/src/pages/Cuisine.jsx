@@ -1,32 +1,10 @@
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
+
 import SearchLayout from "../layouts/SearchLayout";
 
 function Cuisine() {
-  const [cuisine, setCuisine] = useState([]);
-  const [databaseRecipes, setDatabaseRecipes] = useState([]);
-  let params = useParams();
-
-  const getCuisine = async (name) => {
-    const data = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}`
-    );
-
-    let { results } = await data.json();
-    const response = await fetch(`/api/v1/recipes?category=${name}`);
-    const { recipes } = await response.json();
-
-    setCuisine(results);
-    setDatabaseRecipes(recipes);
-  };
-
-  useEffect(() => {
-    getCuisine(params.type);
-  }, [params.type]);
-  console.log(cuisine);
-  console.log(databaseRecipes);
-
+  const { recipes, results } = useOutletContext();
   return (
     <div>
       <SearchLayout />
@@ -36,7 +14,7 @@ function Cuisine() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {cuisine.map((item) => {
+        {results.map((item) => {
           return (
             <Card key={item.id}>
               <Link to={"/recipe/" + item.id}>
@@ -46,7 +24,7 @@ function Cuisine() {
             </Card>
           );
         })}
-        {databaseRecipes.map((item) => {
+        {recipes.map((item) => {
           return (
             <Card key={item.recipes_id}>
               <Link to={"/databaseSingleRecipe/" + item.recipes_id}>

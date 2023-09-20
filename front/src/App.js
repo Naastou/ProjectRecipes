@@ -5,12 +5,14 @@ import HomeLayout from "./layouts/HomeLayout";
 import About from "./pages/About";
 import Cuisine from "./pages/Cuisine";
 import Login from "./pages/admin/Login";
+import Register from "./pages/admin/Register";
 import RecipesForm from "./pages/admin/RecipesForm";
 import Recipe from "./pages/Recipe";
 import Searched from "./pages/Searched";
 import DatabaseSingleRecipe from "./pages/DatabaseSingleRecipe";
 import ErrorPage from "./pages/ErrorPage";
 import { action as loginAction } from "./pages/admin/Login";
+import { action as registerAction } from "./pages/admin/Register";
 import { action as deleteRecipeAction } from "./pages/admin/DeleteRecipe";
 import EditRecipeForm, {
   action as editRecipeAction,
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
     loader: homeLayoutLoader,
     children: [
       { index: true, element: <Home /> },
-      { path: "cuisine/:type", element: <Cuisine /> },
+      { path: "cuisine", element: <Cuisine /> },
       { path: "recipe/:name", element: <Recipe /> },
       { path: "databaseSingleRecipe/:name", element: <DatabaseSingleRecipe /> },
       { path: "searched/:search", element: <Searched /> },
@@ -36,9 +38,9 @@ const router = createBrowserRouter([
       { path: "login", element: <Login />, action: loginAction },
 
       {
-        path: "/login",
-        element: <Login />,
-        action: loginAction,
+        path: "register",
+        element: <Register />,
+        action: registerAction,
       },
       {
         path: "admin",

@@ -51,7 +51,7 @@ function EditRecipeForm() {
   console.log(categories);
   console.log(recipe);
   return (
-    <Form className="form">
+    <Form method="POST" className="form">
       <h4> Edit Recipe </h4>
       <div className="form-control">
         <p className="form-label">Select category</p>

@@ -31,5 +31,5 @@ app.use("/api/v1/categories", categoriesRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-const port = 5000;
+const port = 8888;
 app.listen(port, () => console.log(`Server is listening on ${port}...`));

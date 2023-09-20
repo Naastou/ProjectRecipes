@@ -2,31 +2,42 @@ import { FaPizzaSlice, FaHamburger } from "react-icons/fa";
 import { GiNoodles, GiChopsticks } from "react-icons/gi";
 import { PiFishSimple } from "react-icons/pi";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Category() {
+  const navigate = useNavigate();
+  const { search, pathname } = useLocation();
+  const handleClick = (category) => {
+    const searchParams = new URLSearchParams(search);
+    searchParams.set("category", category);
+    navigate(`${pathname}?${searchParams.toString()}`);
+  };
   return (
     <List>
-      <SLink to={"/cuisine/Italian"}>
+      <SLink className="button" to="/cuisine">
+        <h4>All</h4>
+      </SLink>
+      <Button onClick={() => handleClick("Italian")}>
         <FaPizzaSlice />
         <h4>Italian</h4>
-      </SLink>
-      <SLink to={"/cuisine/American"}>
+      </Button>
+
+      <Button onClick={() => handleClick("American")}>
         <FaHamburger />
         <h4>American</h4>
-      </SLink>
-      <SLink to={"/cuisine/Thai"}>
+      </Button>
+      <Button onClick={() => handleClick("Thaï")}>
         <GiNoodles />
         <h4>Thaï</h4>
-      </SLink>
-      <SLink to={"/cuisine/Japanese"}>
+      </Button>
+      <Button onClick={() => handleClick("Japanese")}>
         <GiChopsticks />
         <h4>Japanese</h4>
-      </SLink>
-      <SLink to={"/cuisine/African"}>
+      </Button>
+      <Button onClick={() => handleClick("African")}>
         <PiFishSimple />
         <h4>African</h4>
-      </SLink>
+      </Button>
     </List>
   );
 }
@@ -38,7 +49,7 @@ const List = styled.div`
   justify-content: center;
   margin: 2rem auto;
 `;
-const SLink = styled(NavLink)`
+const SLink = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,6 +63,23 @@ const SLink = styled(NavLink)`
   height: 6rem;
   cursor: pointer;
   transform: scale(0.8);
+  color: white;
+`;
+const Button = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  border: 2px solid #f27121;
+  border-radius: 50%;
+  text-decoration: none;
+  background: linear-gradient(35deg, #494949, #313131);
+  width: 6rem;
+  height: 6rem;
+  cursor: pointer;
+  transform: scale(0.8);
+
   h4 {
     color: white;
     font-size: 0.8rem;

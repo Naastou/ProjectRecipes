@@ -16,7 +16,7 @@ import { useTable } from "react-table";
 import { Form, Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin2Line } from "react-icons/ri";
-
+import he from "he";
 const Recipes = ({ columns, data }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
@@ -45,7 +45,7 @@ const Recipes = ({ columns, data }) => {
                 <td {...cell.getCellProps()}>
                   {cell.column.id === "image" ? (
                     <img
-                      src={cell.value}
+                      src={he.decode(cell.value)}
                       alt={`Image for ${row.original.title}`}
                       style={{ width: "60px", height: "50px" }}
                     />

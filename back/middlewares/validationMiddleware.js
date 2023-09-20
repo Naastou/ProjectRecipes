@@ -82,7 +82,7 @@ const validateLoginInput = withValidationErrors([
     .escape(),
 ]);
 
-const validateAddRecipeInput = withValidationErrors([
+const validateRecipeInput = withValidationErrors([
   body("title").trim().notEmpty().withMessage("Title is required").escape(),
   body("image").notEmpty().withMessage("Url is required").escape(),
   body("instructions")
@@ -98,11 +98,6 @@ const validateAddRecipeInput = withValidationErrors([
   //   .withMessage("Category_id is required")
   //   .escape(),
 ]);
-
-// validateUpdateRecipeInput
-const validateUpdateRecipeInput = withValidationErrors(
-  body("completed").trim().isBoolean().withMessage("Type invalide").escape()
-);
 
 // validateIdParam
 const validateIdParam = withValidationErrors(
@@ -132,7 +127,6 @@ module.exports = {
   validateTest,
   validateLoginInput,
   validateRegisterInput,
-  validateAddRecipeInput,
-  validateUpdateRecipeInput,
+  validateRecipeInput,
   validateIdParam,
 };

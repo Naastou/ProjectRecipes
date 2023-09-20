@@ -1,6 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Recipes from "../../components/admin/Recipes.jsx";
+import Pagination from "../../components/admin/Pagination.jsx";
 
 const columns = [
   {
@@ -20,6 +22,12 @@ const columns = [
 
 const Dashboard = () => {
   const { recipes } = useOutletContext();
+  const totalPages = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
   return (
     <section className="section_center">
       <div>
@@ -33,6 +41,12 @@ const Dashboard = () => {
           </Link>
         </button>
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </section>
   );
 };

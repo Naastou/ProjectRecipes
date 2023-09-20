@@ -7,8 +7,7 @@ const {
 } = require("../middlewares/authenticationMiddleware.js");
 
 const {
-  validateAddRecipeInput,
-  validateUpdateRecipeInput,
+  validateRecipeInput,
   validateIdParam,
 } = require("../middlewares/validationMiddleware.js");
 
@@ -21,21 +20,30 @@ const {
   getAllRecipes,
 } = require("../controllers/recipesController.js");
 
-router
-  .route("/admin")
-  .get(authenticateUser, authorizePermissions("admin"), getAllRecipes);
+router.route("/admin").get(getAllRecipes);
 router
   .route("/")
   .get(getAllRecipes)
-  .post(validateAddRecipeInput, authenticateUser, createRecipe);
+  .post(
+    validateRecipeInput,
+    authenticateUser,
+    authorizePermissions("admin"),
+    createRecipe
+  );
 router
   .route("/:id")
   .get(validateIdParam, getSingleRecipe)
   .put(
-    [validateIdParam, validateUpdateRecipeInput],
+    [validateIdParam, validateRecipeInput],
     authenticateUser,
+    authorizePermissions("admin"),
     updateRecipe
   )
-  .delete(validateIdParam, authenticateUser, deleteRecipe);
+  .delete(
+    validateIdParam,
+    authenticateUser,
+    authorizePermissions("admin"),
+    deleteRecipe
+  );
 
 module.exports = router;

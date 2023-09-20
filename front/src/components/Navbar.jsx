@@ -64,6 +64,9 @@ const Navbar = ({ user }) => {
             <NavLink to="/about" className="link">
               About
             </NavLink>
+            <NavLink to="/cuisine" className="link">
+              Recipes
+            </NavLink>
           </div>
         </div>
       </div>
