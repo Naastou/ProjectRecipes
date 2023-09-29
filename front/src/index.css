@@ -58,16 +58,15 @@ nav {
   color: white;
   background: transparent;
   border-color: transparent;
-  transition: var(--transition);
+  transition: all 0.3s linear;
   cursor: pointer;
 }
 .nav-toggle:hover {
-  color: black;
   transform: rotate(90deg);
 }
 
 .nav-user-info {
-  margin-left: 10rem;
+  margin-left: 0;
 }
 .username {
   font-size: 1rem;
@@ -132,6 +131,9 @@ nav {
   }
   .link:hover {
     color: black;
+  }
+  .nav-user-info {
+    margin-left: 10rem;
   }
 }
 

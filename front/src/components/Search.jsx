@@ -6,12 +6,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Search() {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
-  const { search, pathname } = useLocation();
+  const { search } = useLocation();
+  console.log(useLocation());
+
   const submitHandler = (e) => {
     e.preventDefault();
     const searchParams = new URLSearchParams(search);
     searchParams.set("search", input);
-    navigate(`${pathname}?${searchParams.toString()}`);
+
+    navigate(`/cuisine?${searchParams.toString()}`);
   };
 
   return (

@@ -2,18 +2,14 @@ import styled from "styled-components";
 import { Link, useOutletContext } from "react-router-dom";
 
 import SearchLayout from "../layouts/SearchLayout";
+import Pagination from "../components/admin/Pagination";
 
 function Cuisine() {
-  const { recipes, results } = useOutletContext();
+  const { recipes, results, currentPage, numOfPages } = useOutletContext();
   return (
     <div>
       <SearchLayout />
-      <Grid
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <Grid>
         {results.map((item) => {
           return (
             <Card key={item.id}>
@@ -35,6 +31,7 @@ function Cuisine() {
           );
         })}
       </Grid>
+      <Pagination currentPage={currentPage} totalPages={numOfPages} />
     </div>
   );
 }

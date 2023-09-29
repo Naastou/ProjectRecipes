@@ -6,11 +6,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Category() {
   const navigate = useNavigate();
-  const { search, pathname } = useLocation();
+  const { search } = useLocation();
   const handleClick = (category) => {
     const searchParams = new URLSearchParams(search);
     searchParams.set("category", category);
-    navigate(`${pathname}?${searchParams.toString()}`);
+    navigate(`/cuisine?${searchParams.toString()}`);
   };
   return (
     <List>
@@ -21,12 +21,11 @@ function Category() {
         <FaPizzaSlice />
         <h4>Italian</h4>
       </Button>
-
       <Button onClick={() => handleClick("American")}>
         <FaHamburger />
         <h4>American</h4>
       </Button>
-      <Button onClick={() => handleClick("Thaï")}>
+      <Button onClick={() => handleClick("Thai")}>
         <GiNoodles />
         <h4>Thaï</h4>
       </Button>
@@ -64,6 +63,27 @@ const SLink = styled(Link)`
   cursor: pointer;
   transform: scale(0.8);
   color: white;
+  h4 {
+    color: white;
+    font-size: 0.8rem;
+  }
+  svg {
+    color: white;
+    font-size: 1.5rem;
+  }
+  &:hover {
+    background: linear-gradient(to right, #f27121, #e94057);
+  }
+  &.active {
+    background: linear-gradient(to right, #f27121, #e94057);
+
+    svg {
+      color: white;
+    }
+    h4 {
+      color: white;
+    }
+  }
 `;
 const Button = styled.button`
   display: flex;
@@ -79,6 +99,7 @@ const Button = styled.button`
   height: 6rem;
   cursor: pointer;
   transform: scale(0.8);
+  margin-top: 0;
 
   h4 {
     color: white;

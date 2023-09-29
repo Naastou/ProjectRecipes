@@ -36,11 +36,11 @@ function RecipesForm() {
       <div className="form-control">
         <p className="form-label">Select category</p>
         <select name="category_id">
-          <option value="5">Italian</option>
-          <option value="4">American</option>
-          <option value="3">Thaï</option>
-          <option value="2">Japanese</option>
-          <option value="1">African</option>
+          {categories.map((category) => (
+            <option key={category.category_id} value={category.category_id}>
+              {category.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className="form-control">

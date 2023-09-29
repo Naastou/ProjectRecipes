@@ -49,18 +49,18 @@ function EditRecipeForm() {
   const recipe = useLoaderData();
   const { categories } = useOutletContext();
   console.log(categories);
-  console.log(recipe);
+
   return (
     <Form method="POST" className="form">
       <h4> Edit Recipe </h4>
       <div className="form-control">
         <p className="form-label">Select category</p>
-        <select name="Category">
-          <option value="Italian">Italian</option>
-          <option value="American">American</option>
-          <option value="Thaï">Thaï</option>
-          <option value="Japanese">Japanese</option>
-          <option value="Afriacn">African</option>
+        <select name="category_id">
+          {categories.map((category) => (
+            <option key={category.category_id} value={category.category_id}>
+              {category.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className="form-control">

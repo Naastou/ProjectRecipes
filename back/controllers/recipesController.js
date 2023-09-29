@@ -19,7 +19,14 @@ const getAllRecipes = async (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
   const offset = (page - 1) * limit;
-
+  const {
+    rows: [{ count }],
+  } = await db.query(
+    `SELECT COUNT (*) FROM recipes JOIN categories USING (category_id) ${
+      whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : ""
+    }`,
+    parameters
+  );
   queryString = `${queryString} ${
     whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : ""
   } LIMIT $${parameters.length + 1} OFFSET $${parameters.length + 2}`;
@@ -27,7 +34,10 @@ const getAllRecipes = async (req, res) => {
   console.log(queryString);
   const { rows: recipes } = await db.query(queryString, parameters);
 
-  res.status(StatusCodes.OK).json({ count: recipes.length, recipes });
+  const numOfPages = Math.ceil(count / limit);
+  res
+    .status(StatusCodes.OK)
+    .json({ count, recipes, numOfPages, currentPage: page });
 };
 
 const createRecipe = async (req, res) => {

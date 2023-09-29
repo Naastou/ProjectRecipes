@@ -32,7 +32,7 @@ function About() {
 
 const HeroSection = styled.section`
   background: linear-gradient(rgba(241, 80, 37, 0.5), rgba(0, 0, 0, 0.75)),
-    url("./background1.jpg") no-repeat center/cover fixed;
+    url("/images/background1.jpg") no-repeat center/cover fixed;
 
   height: fit-content;
   color: #fafafc;
@@ -72,7 +72,7 @@ const HeroSection = styled.section`
   }
   @media (max-width: 600px) {
     background: linear-gradient(rgba(241, 80, 37, 0.5), rgba(0, 0, 0, 0.75)),
-      url("./background1.jpg") no-repeat center/cover fixed;
+      url("/images/background1.jpg") no-repeat center/cover fixed;
 
     .heroInner {
       display: block;

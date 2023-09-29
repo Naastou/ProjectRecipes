@@ -8,17 +8,24 @@ import {
 
 import axios from "axios";
 
-export const loader = async () => {
+export const loader = async ({ request }) => {
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
   const token = localStorage.getItem("token");
 
   try {
-    const { data } = await axios("/api/v1/recipes", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await axios(
+      "/api/v1/recipes",
+      { params },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    return { data };
+    return data;
   } catch (error) {
     console.log(error?.response?.data?.msg);
     return redirect("/");
@@ -26,18 +33,13 @@ export const loader = async () => {
 };
 
 const DashboardLayout = () => {
-  const { data } = useLoaderData();
+  const { recipes, currentPage, numOfPages } = useLoaderData();
   const { categories, user } = useOutletContext();
   if (!user) {
     return <Navigate to="/" />;
   }
-  const recipes = data.recipes;
 
-  return (
-    <>
-      <Outlet context={{ recipes, categories }} />
-    </>
-  );
+  return <Outlet context={{ recipes, categories, currentPage, numOfPages }} />;
 };
 
 export default DashboardLayout;

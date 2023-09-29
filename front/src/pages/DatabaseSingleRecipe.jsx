@@ -25,7 +25,7 @@ function Recipe() {
       <DetailWrapper>
         <div>
           <h2>{details.title}</h2>
-          <img src={details.image} alt="" />
+          <img className="image" src={details.image} alt="" />
         </div>
         <Info>
           <Button
@@ -92,8 +92,9 @@ const DetailWrapper = styled.section`
     margin: 0rem auto;
     width: 100%;
 
-    img {
-      width: 100%;
+    .image {
+      width: 500px;
+      height: 300px;
     }
   }
 `;

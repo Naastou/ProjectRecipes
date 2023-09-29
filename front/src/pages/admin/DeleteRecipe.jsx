@@ -15,5 +15,5 @@ export const action = async ({ params }) => {
     toast.error(error?.response?.data?.msg);
   }
 
-  return redirect("/admin/dashboard");
+  return redirect("/admin");
 };
