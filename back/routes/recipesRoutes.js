@@ -13,7 +13,6 @@ const {
 
 const {
   createRecipe,
-  getAllUserRecipes,
   getSingleRecipe,
   updateRecipe,
   deleteRecipe,
@@ -25,24 +24,24 @@ router
   .route("/")
   .get(getAllRecipes)
   .post(
-    validateRecipeInput,
     authenticateUser,
     authorizePermissions("admin"),
+    validateRecipeInput,
     createRecipe
   );
 router
   .route("/:id")
   .get(validateIdParam, getSingleRecipe)
   .put(
-    [validateIdParam, validateRecipeInput],
     authenticateUser,
     authorizePermissions("admin"),
+    [validateIdParam, validateRecipeInput],
     updateRecipe
   )
   .delete(
-    validateIdParam,
     authenticateUser,
     authorizePermissions("admin"),
+    validateIdParam,
     deleteRecipe
   );
 

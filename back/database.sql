@@ -1,3 +1,4 @@
+
 CREATE DATABASE africanrecipes_database;
 
 CREATE TYPE user_role AS ENUM ('admin', 'user');

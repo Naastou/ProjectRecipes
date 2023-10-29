@@ -5,7 +5,7 @@ const authenticateUser = (req, _res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw new UnauthenticatedError("Pas de token fournit");
+    throw new UnauthenticatedError("no token provided");
   }
 
   const token = authHeader.split(" ")[1];
@@ -16,16 +16,15 @@ const authenticateUser = (req, _res, next) => {
     req.user = { name, userId, role };
     next();
   } catch (error) {
-    throw new UnauthenticatedError("Authentification non valide");
+    throw new UnauthenticatedError("Invalid authentication");
   }
 };
 
 const authorizePermissions = (...roles) => {
   return (req, _res, next) => {
     if (roles.includes(req.user.role)) {
-      throw new UnauthenticatedError("Accès non autorisé");
+      throw new UnauthenticatedError("Access denied");
     }
-
     next();
   };
 };

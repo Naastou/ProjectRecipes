@@ -15,6 +15,7 @@ const getAllRecipes = async (req, res) => {
     whereClauses.push(`recipes.title ILIKE $${parameters.length + 1}`);
     parameters.push(`%${search}%`);
   }
+
   // pagination + limite
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
@@ -27,11 +28,12 @@ const getAllRecipes = async (req, res) => {
     }`,
     parameters
   );
+
   queryString = `${queryString} ${
     whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : ""
   } LIMIT $${parameters.length + 1} OFFSET $${parameters.length + 2}`;
   parameters.push(limit, offset);
-  console.log(queryString);
+
   const { rows: recipes } = await db.query(queryString, parameters);
 
   const numOfPages = Math.ceil(count / limit);

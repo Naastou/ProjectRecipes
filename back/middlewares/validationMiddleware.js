@@ -15,11 +15,11 @@ const withValidationErrors = (validateValues) => {
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => error.msg);
 
-        if (errorMessages[0].startsWith("Pas d'article")) {
+        if (errorMessages[0].startsWith("No items")) {
           throw new NotFoundError(errorMessages);
         }
 
-        if (errorMessages[0].startsWith("Accès non")) {
+        if (errorMessages[0].startsWith("Access denied")) {
           throw new UnauthorizedError(errorMessages);
         }
 
@@ -36,20 +36,20 @@ const validateTest = withValidationErrors([
   body("name")
     .trim()
     .notEmpty()
-    .withMessage("Le nom est requis")
+    .withMessage("Name is required")
     .isLength({ min: 3, max: 50 })
-    .withMessage("Le nom doit contenir entre 3 et 50 caractères")
+    .withMessage("The name must contain between 3 and 50 characters")
     .escape(),
 ]);
 
 const validateRegisterInput = withValidationErrors([
-  body("name").trim().notEmpty().withMessage("Le nom est requis").escape(),
+  body("name").trim().notEmpty().withMessage("Name is required").escape(),
   body("email")
     .trim()
     .notEmpty()
-    .withMessage("L'email est requis")
+    .withMessage("Email is required")
     .isEmail()
-    .withMessage("Format d'email non valide")
+    .withMessage("Invalid email format")
     .escape()
     .custom(async (email) => {
       const {
@@ -57,13 +57,13 @@ const validateRegisterInput = withValidationErrors([
       } = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
       if (user) {
-        throw new Error("L'email existe déjà");
+        throw new Error("The email already exists");
       }
     }),
   body("password")
     .trim()
     .notEmpty()
-    .withMessage("Le mot de passe est requis")
+    .withMessage("Password is required")
     .escape(),
 ]);
 
@@ -71,14 +71,14 @@ const validateLoginInput = withValidationErrors([
   body("email")
     .trim()
     .notEmpty()
-    .withMessage("L'email est requis")
+    .withMessage("Email is required")
     .isEmail()
-    .withMessage("Format d'email non valide")
+    .withMessage("Invalid email format")
     .escape(),
   body("password")
     .trim()
     .notEmpty()
-    .withMessage("Le mot de passe est requis")
+    .withMessage("Password is required")
     .escape(),
 ]);
 
@@ -93,17 +93,13 @@ const validateRecipeInput = withValidationErrors([
     .notEmpty()
     .withMessage("Ingredients are required")
     .escape(),
-  // body("category_id")
-  //   .notEmpty()
-  //   .withMessage("Category_id is required")
-  //   .escape(),
 ]);
 
 // validateIdParam
 const validateIdParam = withValidationErrors(
   param("id").custom(async (id, { req }) => {
     if (isNaN(Number(id))) {
-      throw new Error("Id non valide");
+      throw new Error("Invalide Id");
     }
 
     const {
@@ -113,13 +109,6 @@ const validateIdParam = withValidationErrors(
     if (!recipe) {
       throw new Error(`No recipes with this id ${id}`);
     }
-
-    // const isOwner = req.user.userId === recipe.user_id;
-    // const isAdmin = req.user.role === "admin";
-
-    // if (!isOwner && !isAdmin) {
-    //   throw new Error("Accès non autorisé");
-    // }
   })
 );
 

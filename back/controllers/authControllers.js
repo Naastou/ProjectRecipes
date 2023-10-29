@@ -28,9 +28,7 @@ const register = async (req, res) => {
     role: user.role,
   });
 
-  res
-    .status(StatusCodes.CREATED)
-    .json({ msg: "Utilisateur enregistré", token });
+  res.status(StatusCodes.CREATED).json({ msg: "User is logged out", token });
 };
 
 const login = async (req, res) => {
@@ -41,13 +39,13 @@ const login = async (req, res) => {
   } = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
   if (!user) {
-    throw new BadRequestError("Identifiants invalides");
+    throw new BadRequestError("Invalid identifiers");
   }
 
   const isPasswordCorrect = await comparePassword(password, user.password);
 
   if (!isPasswordCorrect) {
-    throw new BadRequestError("Identifiants invalides");
+    throw new BadRequestError("Invalid identifiers");
   }
 
   const token = createJWT({
@@ -56,7 +54,7 @@ const login = async (req, res) => {
     role: user.role,
   });
 
-  res.status(StatusCodes.OK).json({ msg: "Utilisateur connecté", token });
+  res.status(StatusCodes.OK).json({ msg: "User is logged in", token });
 };
 
 module.exports = { register, login };
