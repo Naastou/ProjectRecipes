@@ -1,22 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
-import { NavLink, Link, useNavigate, useRevalidator } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import { GiChefToque } from "react-icons/gi";
-import { toast } from "react-toastify";
-const Navbar = ({ user }) => {
+
+const Navbar = ({ user, logout }) => {
   const [showLinks, setShowLinks] = useState(false);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
-  const navigate = useNavigate();
-  const revalidator = useRevalidator();
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    revalidator.revalidate();
-    toast.success("Déconnexion...");
-    navigate("/");
-  };
   useEffect(() => {
     if (!linksRef.current) return;
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -57,7 +49,6 @@ const Navbar = ({ user }) => {
                 Dashboard
               </NavLink>
             )}
-
             <NavLink to="/" className="link">
               Home
             </NavLink>

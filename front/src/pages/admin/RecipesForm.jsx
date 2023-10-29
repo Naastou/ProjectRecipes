@@ -29,7 +29,7 @@ function RecipesForm() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const { categories } = useOutletContext();
-  console.log(categories);
+  
   return (
     <Form method="POST" className="form">
       <h4> Add Recipe </h4>

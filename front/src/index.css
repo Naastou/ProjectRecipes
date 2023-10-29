@@ -260,62 +260,6 @@ form h4 {
   border-radius: 5px;
   padding: 0.5rem 1rem;
 }
-/* Sidebar */
-
-.sidebar-toggle {
-  position: fixed;
-  top: 2rem;
-  right: 3rem;
-  background: transparent;
-  border-color: transparent;
-  color: white;
-  cursor: pointer;
-}
-.nav {
-  width: 310px;
-  position: fixed;
-
-  left: 0;
-  top: 0;
-  background-color: #f3a371;
-  height: 100%;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  transform: translateX(-100%);
-}
-.nav-open {
-  transform: translateX(0);
-}
-
-.nav-button {
-  z-index: 2;
-}
-
-.sidebar-toggle span {
-  font-size: 2.5rem;
-}
-.sidebar-toggle span:hover {
-  color: #f27121;
-}
-.links-sidebar {
-  display: block;
-  font-size: 1.5rem;
-  text-transform: capitalize;
-  padding: 1rem 1.5rem;
-  color: white;
-  transition: all 0.3s linear;
-  cursor: pointer;
-}
-.links-sidebar:hover {
-  background: #f27121;
-  color: aliceblue;
-  padding: 1.5rem;
-}
-
 /* Table Recipes */
 .recipes-table {
   text-align: center;

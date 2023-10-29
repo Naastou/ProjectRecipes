@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import SearchLayout from "../layouts/SearchLayout";
+import he from "he";
 
 function Recipe() {
   let params = useParams();
@@ -25,8 +26,13 @@ function Recipe() {
       <DetailWrapper>
         <div>
           <h2>{details.title}</h2>
-          <img className="image" src={details.image} alt="" />
+          <img
+            className="image"
+            src={details.image && he.decode(details.image)}
+            alt=""
+          />
         </div>
+
         <Info>
           <Button
             className={activeTab === "instructions" ? "active" : ""}
@@ -70,9 +76,12 @@ const DetailWrapper = styled.section`
     color: white;
     border: 2px solid black;
   }
-  img {
-    width: 100%;
-  }
+   .image {
+      width: 500px;
+      height: 300px;
+    }
+  
+  
   h2 {
     margin-bottom: 2rem;
   }
@@ -91,12 +100,14 @@ const DetailWrapper = styled.section`
     row-gap: 3rem;
     margin: 0rem auto;
     width: 100%;
-
     .image {
-      width: 500px;
+      width: 350px;
       height: 300px;
     }
-  }
+  
+;
+   
+    
 `;
 
 const Button = styled.button`

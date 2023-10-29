@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link, useOutletContext } from "react-router-dom";
-
+import he from "he";
 import SearchLayout from "../layouts/SearchLayout";
 import Pagination from "../components/admin/Pagination";
 
@@ -24,7 +24,7 @@ function Cuisine() {
           return (
             <Card key={item.recipes_id}>
               <Link to={"/databaseSingleRecipe/" + item.recipes_id}>
-                <img src={item.image} alt="" />
+                <img src={item.image && he.decode(item.image)} alt="" />
                 <h4>{item.title}</h4>
               </Link>
             </Card>
@@ -45,7 +45,8 @@ const Grid = styled.div`
 const Card = styled.div`
   width: 350px;
   img {
-    width: 100%;
+    width: 350px;
+    height: 250px;
     border-radius: 2rem;
   }
   a {

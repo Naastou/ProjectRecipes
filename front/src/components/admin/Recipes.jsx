@@ -1,23 +1,11 @@
-// import SingleRecipe from "./SingleRecipe";
-
-// const Recipes = ({ recipes }) => {
-//   return (
-//     <div className="recipes">
-//       {recipes.map((item) => {
-//         return <SingleRecipe key={item.recipes_id} recipe={item} />;
-//       })}
-//     </div>
-//   );
-// };
-
-// export default Recipes;
-
 import { useTable } from "react-table";
 import { Form, Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import he from "he";
+
 const Recipes = ({ columns, data }) => {
+  console.log(data);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,

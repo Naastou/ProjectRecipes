@@ -7,7 +7,6 @@ function Search() {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
   const { search } = useLocation();
-  console.log(useLocation());
 
   const submitHandler = (e) => {
     e.preventDefault();
