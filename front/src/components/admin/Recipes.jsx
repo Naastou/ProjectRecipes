@@ -34,7 +34,7 @@ const Recipes = ({ columns, data }) => {
                   {cell.column.id === "image" ? (
                     <img
                       src={he.decode(cell.value)}
-                      alt={`Image for ${row.original.title}`}
+                      alt={` for ${row.original.title}`}
                       style={{ width: "60px", height: "50px" }}
                     />
                   ) : (

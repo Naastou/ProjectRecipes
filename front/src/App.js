@@ -8,7 +8,6 @@ import Login from "./pages/admin/Login";
 import Register from "./pages/admin/Register";
 import RecipesForm from "./pages/admin/RecipesForm";
 import Recipe from "./pages/Recipe";
-import Searched from "./pages/Searched";
 import DatabaseSingleRecipe from "./pages/DatabaseSingleRecipe";
 import ErrorPage from "./pages/ErrorPage";
 import { action as loginAction } from "./pages/admin/Login";
@@ -33,7 +32,6 @@ const router = createBrowserRouter([
       { path: "cuisine", element: <Cuisine /> },
       { path: "recipe/:name", element: <Recipe /> },
       { path: "databaseSingleRecipe/:name", element: <DatabaseSingleRecipe /> },
-      // { path: "searched/:search", element: <Searched /> },
       { path: "about", element: <About /> },
       { path: "login", element: <Login />, action: loginAction },
 

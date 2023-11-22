@@ -3,6 +3,14 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import SearchLayout from "../layouts/SearchLayout";
 import he from "he";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "react-share";
 
 function Recipe() {
   let params = useParams();
@@ -18,6 +26,12 @@ function Recipe() {
     };
     fetchDetails();
   }, [params.name]);
+
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const title =
+    typeof document !== "undefined"
+      ? document.title
+      : "Check out this awesome content!";
 
   return (
     <div>
@@ -61,7 +75,19 @@ function Recipe() {
             </ul>
           )}
         </Info>
+        <div class="sharethis-inline-share-buttons"></div>
       </DetailWrapper>
+      <div className="share-buttons">
+        <FacebookShareButton url={shareUrl} quote={title}>
+          <FacebookIcon size={50} />
+        </FacebookShareButton>
+        <TwitterShareButton url={shareUrl} title={title}>
+          <TwitterIcon round />
+        </TwitterShareButton>
+        <WhatsappShareButton url={shareUrl} title={title}>
+          <WhatsappIcon iconFillColor="pink" />
+        </WhatsappShareButton>
+      </div>
     </div>
   );
 }

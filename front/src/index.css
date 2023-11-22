@@ -338,3 +338,9 @@ form h4 {
   display: flex;
   flex-wrap: wrap;
 }
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
